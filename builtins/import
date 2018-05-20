@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euf
+
+if [ "$#" -ne 1 ]; then
+	echo "Bashole subcommand usage: import <encoded_bundle>"
+	echo "Decode a bundle of user scripts and import them into your Bashole."
+	exit 1
+fi
+
+input="$1"
+function cleanup() {
+	popd >/dev/null 2>&1
+}
+
+mkdir -p "$BASHOLE_DIRECTORY"
+pushd "$BASHOLE_DIRECTORY" >/dev/null 2>&1
+trap cleanup EXIT
+
+tar xvzf <(base64 -d <(echo "$input"))

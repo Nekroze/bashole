@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euf
+
+if [ "$#" -lt 1 ]; then
+	echo "Bashole subcommand usage: export <script>..."
+	echo "Bundle a collection of user scripts and encode them as text for sharing."
+	exit 1
+fi
+
+temptar="$(mktemp)"
+function cleanup() {
+	rm -f "$temptar"
+	popd >/dev/null 2>&1
+}
+
+mkdir -p "$BASHOLE_DIRECTORY"
+pushd "$BASHOLE_DIRECTORY" >/dev/null 2>&1
+trap cleanup EXIT
+
+echo "$(base64 <(tar cz $@) | tr -d '\n')"

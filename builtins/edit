@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euf
+
+if [ "$#" -ne 1 ]; then
+	echo "Bashole subcommand usage: edit <script>"
+	echo "If after the editor returns back to Bashole the script is empty it will be deleted."
+	exit 1
+fi
+source "$BASHOLE_HELPERS"
+
+target="$1"
+target_path="$BASHOLE_DIRECTORY/$target"
+template_path="$BUILTIN_DIRECTORY/../template.sh"
+sane_editor="${EDITOR:-nano}"
+
+mkdir -p "$BASHOLE_DIRECTORY"
+
+if [ ! -f "$target_path" ]; then
+	cp "$template_path" "$target_path"
+	chmod +x "$target_path"
+fi
+
+"$sane_editor" "$target_path"
+
+if ! grep -q '[^[:space:]]' < "$target_path"; then
+	rm "$target_path"
+elif hash shellcheck 2>/dev/null; then
+	if ! shellcheck "$target_path"; then
+		if get_informed_consent "redit file"; then
+			$@
+		fi
+	fi
+fi

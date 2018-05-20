@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+echo
+echo ENVIRONMENT WITHOUT HELPERS
+echo
+printenv
+echo
+echo ENVIRONMENT WITH HELPERS
+echo
+source "$BASHOLE_HELPERS"
+printenv
+echo
+echo ARGUMENTS
+echo
+for var in "$@"
+do
+    echo "$var"
+done

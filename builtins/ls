@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euf
+
+function list_dir() {
+	if [ ! -d "$1" ]; then
+		return 0
+	fi
+	found="$(find "$1" -type f -executable)"
+	if [ -n "$found" ]; then
+		echo "$found" | xargs -L 1 basename
+	fi
+}
+
+list_dir "$BUILTIN_DIRECTORY"
+list_dir "$BASHOLE_DIRECTORY"
