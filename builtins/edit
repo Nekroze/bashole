@@ -27,7 +27,7 @@ if ! grep -q '[^[:space:]]' < "$target_path"; then
 elif hash shellcheck 2>/dev/null; then
 	if ! shellcheck "$target_path"; then
 		if get_informed_consent "redit file"; then
-			$@
+			$0 $@
 		fi
 	fi
 fi
