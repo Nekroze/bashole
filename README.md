@@ -17,10 +17,12 @@ Bashole always takes a script name as its first parameter and then any other par
 ## Scripting
 
 All scripts managed and executed by Bashole will have available the following environment variables that they may use:
+
  - `BUILTIN_DIRECTORY` Directory containing builtin scripts to bashole
  - `BASHOLE_DIRECTORY` Directory containing user scripts managed by bashole, defaults to ~/.bashole
  - `BASHOLE_HELPERS` File containing various helper functions that bashole scripts or builtins may use
  - `BASHOLE_TEMPLATE` File containing various helper functions that bashole scripts or builtins may use
+
 Those with the `BASHOLE_` prefix can be overriden by the user.
 
 To start scripting a new script, or edit an existing script managed by bashole, you can utilize the `edit` builtin:
