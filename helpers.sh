@@ -51,3 +51,7 @@ function maybe_shellcheck() {
 		return 0
 	fi
 }
+
+function get_file_description() {
+	grep "^# Description" "$1" | cut -d":" -f2 || true
+}

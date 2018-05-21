@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Description: list builtin and user scripts
 set -euf
+source "$BASHOLE_HELPERS"
 GREEN='\033[0;32m'
 NC='\033[0m'
 
@@ -8,7 +9,7 @@ function list_dir() {
 	while IFS= read -r -d '' script
 	do
 		name="$(basename "$script")"
-		desc="$(grep "^# Description" "$script" | cut -d":" -f2)"
+		desc="$(get_file_description "$script")"
 		echo "$name	$desc"
 	done < <(find "$1" -type f -executable -print0)
 }
