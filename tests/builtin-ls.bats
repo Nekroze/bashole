@@ -4,7 +4,7 @@
 @test "invoking bashole ls lists ls" {
   run ./bashole ls
   [ "$status" -eq 0 ]
-  [[ " ${lines[@]} " =~ "ls" ]]
+  [[ " ${lines[@]} " =~ "ls	 list builtin and user scripts" ]]
 }
 
 @test "invoking bashole ls lists dump" {
