@@ -21,11 +21,13 @@ export BUILTIN_DIRECTORY BASHOLE_DIRECTORY BASHOLE_HELPERS BASHOLE_TEMPLATE
 
 # Utility Functions
 
+# Get the path to a user script by its name
 function find_script_by_name() {
 	WHICH="$(which which)"
 	PATH="$SOURCE_DIRECTORY/builtins:$BASHOLE_DIRECTORY" $WHICH "$1"
 }
 
+# Ask the user a question and yes or no defaulting to no.
 function get_informed_consent() {
 	message="$1"
 	read -r -p "$message [y/N]?" yn
@@ -34,4 +36,18 @@ function get_informed_consent() {
 		[Nn]* ) return 1;;
 		* ) return 1;;
 	esac
+}
+
+# Wrapper around any command and its params to supress stdout and stderr
+function silently() {
+	$@ >/dev/null 2>&1
+}
+
+# This is a wrapper around shellcheck so it does not fail if shellcheck is not installed
+function maybe_shellcheck() {
+	if silently hash shellcheck; then
+		shellcheck "$1"
+	else
+		return 0
+	fi
 }

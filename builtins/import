@@ -6,14 +6,27 @@ if [ "$#" -ne 1 ]; then
 	echo "Decode a bundle of user scripts and import them into your Bashole."
 	exit 1
 fi
+source "$BASHOLE_HELPERS"
 
 input="$1"
 function cleanup() {
 	popd >/dev/null 2>&1
 }
 
-mkdir -p "$BASHOLE_DIRECTORY"
-pushd "$BASHOLE_DIRECTORY" >/dev/null 2>&1
+WORKING_DIR="$(mktemp -d)"
+mkdir -p "$BASHOLE_DIRECTORY" "$WORKING_DIR"
+
+silently pushd "$WORKING_DIR"
 trap cleanup EXIT
 
-tar xvzf <(base64 -d <(echo "$input"))
+imported="$(tar xvzf <(base64 -d <(echo "$input")))"
+
+for script in $imported; do
+	if ! maybe_shellcheck "$script"; then
+		if ! get_informed_consent "Shellcheck found potential problems with '$script' would you still like to import it?"; then
+			continue
+		fi
+	fi
+	mv "$script" "$BASHOLE_DIRECTORY"
+	echo "$script"
+done
