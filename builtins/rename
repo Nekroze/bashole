@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Description: rename a user script
 set -euf
 
 if [ "$#" -ne 2 ]; then

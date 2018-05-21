@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Description: create/edit a user script, will delete it if the script is left empty
 set -euf
 
 if [ "$#" -ne 1 ]; then

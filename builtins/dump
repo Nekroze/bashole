@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Description: Display all available environment variables for a user script
 echo
 echo ENVIRONMENT WITHOUT HELPERS
 echo

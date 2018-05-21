@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Description: bundle and export one or more scripts with base64 encoding
 set -euf
 
 if [ "$#" -lt 1 ]; then
