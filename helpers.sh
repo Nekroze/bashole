@@ -53,5 +53,5 @@ function maybe_shellcheck() {
 }
 
 function get_file_description() {
-	grep "^# Description" "$1" | cut -d":" -f2 || true
+	grep "^# Description" "$1" | cut -d":" -f2 | sed -e 's/^[[:space:]]*//' || true
 }
