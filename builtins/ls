@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euf
+GREEN='\033[0;32m'
+NC='\033[0m'
 
 function list_dir() {
 	if [ ! -d "$1" ]; then
@@ -11,5 +13,8 @@ function list_dir() {
 	fi
 }
 
+echo -e "${GREEN}Builtins:${NC}"
 list_dir "$BUILTIN_DIRECTORY"
+echo
+echo -e "${GREEN}User Scripts:${NC}"
 list_dir "$BASHOLE_DIRECTORY"
