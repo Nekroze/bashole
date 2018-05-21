@@ -4,7 +4,15 @@ Manage and share your ever growing collection of bash scripts.
 
 # Installation
 
-Bashole uses pure bash shell scripts for everything and can be run from the git directory as done in this document, however if you would like a deeper integration you can add the git repository and your `$BASHOLE_DIRECTORY` to your shell's `$PATH` environment variables.
+Bashole uses pure bash shell scripts for everything and can be run from the git directory as done in this document, however if you would like a deeper integration you can add the git repository and your `BASHOLE_DIRECTORY` to your shell's `PATH` environment variables.
+
+There is a builtin script that will do an install assuming various things such as using bash as your primary shell and can be executed like so:
+
+```bash
+ $ ./bashole install
+```
+
+This will add to your `~/.bashrc` file an extension of your `PATH` environment variable to include this git repository and your `BASHOLE_DIRECTORY` to your path allowing usage of the `bashole` command anywhere along with direct usage of any of your user scripts without using the `bashole` as a wrapper although the environment variables described below would not be available in the direct user script execution.
 
 # Usage
 

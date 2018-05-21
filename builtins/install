@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euf
+echo 'export PATH="$PATH:'"$(dirname "$BASHOLE_HELPERS"):$BASHOLE_DIRECTORY" >> ~/.bashrc
+echo "Please execute ~/.bashrc for changes to take effect"
