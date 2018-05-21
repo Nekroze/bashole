@@ -41,7 +41,7 @@ To start scripting a new script, or edit an existing script managed by bashole, 
 
 This will copy a modest template script (which can be overriden by setting `BASHOLE_TEMPLATE` in your shell) to `$BASHOLE_DIRECTORY/do-cool-thing` then make it executable before finally opening your favourite editor (indicated by the `EDITOR` environment variable) for you to write your script.
 
-If you have [ShellCheck](https://www.shellcheck.net) installed it will be run on a script after your editor returns to show any unsafe or error prone sections of your script. If any issues are found you will be prompted to re-edit the script.
+If you have [ShellCheck](https://www.shellcheck.net) installed it will be run on a script after your editor exits to show any unsafe or error prone sections of your script. If any issues are found you will be prompted to re-edit the script.
 
 If after this the script file opened is empty Bashole will delete it for you, allowing the `edit` command to handle creation, deletion, and modification. If not deleted then the following command will now execute your new script:
 
@@ -53,11 +53,13 @@ If after this the script file opened is empty Bashole will delete it for you, al
 
 The following builtin scripts are available only when run through bashole.
 
-- `ls` list all builtin and user scripts
-- `dump` show all environment variables available to custom scripts
-- `edit` edit any given user script, delete it if it is made empty
-- `export` export a bundle of user scripts encoded as text
-- `import` import text encoded bundle of user scripts
+- `install`	install bashole into $PATH via ~/.bashrc
+- `import`	import a previously exported user script bundle
+- `rename`	rename a user script
+- `export`	bundle and export one or more scripts with base64 encoding
+- `edit` 	create/edit a user script, will delete it if the script is left empty
+- `dump` 	Display all available environment variables for a user script
+- `ls`	 	list builtin and user scripts
 
 ## Sharing
 
@@ -75,4 +77,4 @@ The long string of text is a base64 encoded gzipped tarball and can be given to 
 do-cool-thing
 ```
 
-Here the textual representation of your script bundle is the third parameter to Bashole and it displays each script name that was imported.
+If you have [ShellCheck](https://www.shellcheck.net) it will be executed on each script you attempt to import and will ask for imort confirmation should any problems be found.
