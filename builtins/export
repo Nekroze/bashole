@@ -13,6 +13,14 @@ function cleanup() {
 	popd >/dev/null 2>&1
 }
 
+for arg
+do
+	if [ ! -f "$BASHOLE_DIRECTORY/$arg" ]; then
+		echo "User script '$arg' does not exist!"
+		exit 1
+	fi
+done
+
 mkdir -p "$BASHOLE_DIRECTORY"
 pushd "$BASHOLE_DIRECTORY" >/dev/null 2>&1
 trap cleanup EXIT
