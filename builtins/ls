@@ -2,7 +2,9 @@
 # Description: list builtin and user scripts
 set -euf
 source "$BASHOLE_HELPERS"
-GREEN='\033[0;32m'
+C_HEADER='\033[0;32m'
+C_SCRIPT='\033[0;37m'
+C_DESCRIPTION=''
 NC='\033[0m'
 
 function list_dir() {
@@ -10,11 +12,11 @@ function list_dir() {
 	do
 		name="$(basename "$script")"
 		desc="$(get_file_description "$script")"
-		echo "$name	$desc"
+		echo -e "${C_SCRIPT}$name${NC}	${C_DESCRIPTION}$desc${NC}"
 	done < <(find "$1" -type f -executable -print0)
 }
 
-echo -e "${GREEN}Builtins:${NC}"
+echo -e "${C_HEADER}Builtins:${NC}"
 list_dir "$BUILTIN_DIRECTORY"
-echo -e "${GREEN}User Scripts:${NC}"
+echo -e "${C_HEADER}User Scripts:${NC}"
 list_dir "$BASHOLE_DIRECTORY"
