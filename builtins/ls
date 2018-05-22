@@ -6,14 +6,18 @@ C_HEADER='\033[0;32m'
 C_SCRIPT='\033[0;37m'
 C_DESCRIPTION=''
 NC='\033[0m'
+DELIMITER='\u2620' # some rarely used character to split names from descriptions, should never occur in either string.
 
 function list_dir() {
-	while IFS= read -r -d '' script
-	do
-		name="$(basename "$script")"
-		desc="$(get_file_description "$script")"
-		echo -e "${C_SCRIPT}$name${NC}	${C_DESCRIPTION}$desc${NC}"
-	done < <(find "$1" -type f -executable -print0)
+  output=""
+  while IFS= read -r -d '' script
+  do
+    name="$(basename "$script")"
+    desc="$(get_file_description "$script")"
+    output="$output
+$(echo -e "${C_SCRIPT}$name${NC}${DELIMITER}${C_DESCRIPTION}$desc${NC}")"
+  done < <(find "$1" -type f -executable -print0)
+  column -t -s"$(echo -e "$DELIMITER")" <(echo "$output")
 }
 
 echo -e "${C_HEADER}Builtins:${NC}"
