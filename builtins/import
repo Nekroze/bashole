@@ -28,6 +28,6 @@ for script in $imported; do
 			continue
 		fi
 	fi
-	mv "$script" "$BASHOLE_DIRECTORY"
+	mv "$script" "$BASHOLE_DIRECTORY/$script"
 	echo "$script"
 done

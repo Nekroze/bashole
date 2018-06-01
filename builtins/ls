@@ -12,7 +12,7 @@ function list_dir() {
   output=""
   while IFS= read -r -d '' script
   do
-    name="$(basename "$script")"
+    name="$(realpath --relative-to "$1" "$script")"
     desc="$(get_file_description "$script")"
     output="$output
 $(echo -e "${C_SCRIPT}$name${NC}${DELIMITER}${C_DESCRIPTION}$desc${NC}")"

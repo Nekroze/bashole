@@ -30,5 +30,5 @@ if [ "$#" -lt 1 ]; then
 	echo "$HELP"
 	exit 1
 else
-	$(find_script_by_name "$1") "${@:2}"
+  $(find_script_by_name "$1") "${@:2}"
 fi

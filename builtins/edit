@@ -14,7 +14,7 @@ target_path="$BASHOLE_DIRECTORY/$target"
 template_path="$BUILTIN_DIRECTORY/../template.sh"
 sane_editor="${EDITOR:-nano}"
 
-mkdir -p "$BASHOLE_DIRECTORY"
+mkdir -p "$(dirname "$target_path")"
 
 if [ ! -f "$target_path" ]; then
 	cp "$template_path" "$target_path"

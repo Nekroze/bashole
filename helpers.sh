@@ -23,8 +23,12 @@ export BUILTIN_DIRECTORY BASHOLE_DIRECTORY BASHOLE_HELPERS BASHOLE_TEMPLATE
 
 # Get the path to a user script by its name
 function find_script_by_name() {
-	WHICH="$(which which)"
-	PATH="$SOURCE_DIRECTORY/builtins:$BASHOLE_DIRECTORY" $WHICH "$1"
+  if [ -f "$BASHOLE_DIRECTORY/$1" ]; then
+    echo "$BASHOLE_DIRECTORY/$1"
+  else
+    WHICH="$(which which)"
+    PATH="$SOURCE_DIRECTORY/builtins:$BASHOLE_DIRECTORY" $WHICH "$1"
+  fi
 }
 
 # Ask the user a question and yes or no defaulting to no.
