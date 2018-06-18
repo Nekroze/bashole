@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 # Description: install bashole into $PATH via ~/.bashrc
 set -euf
-echo 'export PATH="$PATH:'"$(dirname "$BASHOLE_HELPERS"):$BASHOLE_DIRECTORY" >> ~/.bashrc
-echo 'Please execute 'source ~/.bashrc' for changes to take effect'
+RC=~/bashrc
+if [ -f ~/.zshrc ]; then
+	RC=~/.zshrc
+fi
+if [ -w "$RC" ]; then
+	echo 'export PATH="$PATH:'"$(dirname "$BASHOLE_HELPERS"):$BASHOLE_DIRECTORY"'"' >> "$RC"
+	echo 'Please execute 'source ~/.bashrc' for changes to take effect'
+else
+	echo 'Please add the following to your $PATH environment variable:'
+	echo "$(dirname "$BASHOLE_HELPERS"):$BASHOLE_DIRECTORY"
+fi
