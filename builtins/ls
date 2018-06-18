@@ -23,4 +23,8 @@ $(echo -e "${C_SCRIPT}$name${NC}${DELIMITER}${C_DESCRIPTION}$desc${NC}")"
 echo -e "${C_HEADER}Builtins:${NC}"
 list_dir "$BUILTIN_DIRECTORY"
 echo -e "${C_HEADER}User Scripts:${NC}"
-list_dir "$BASHOLE_DIRECTORY"
+if [ -d "$BASHOLE_DIRECTORY" ]; then
+	list_dir "$BASHOLE_DIRECTORY"
+else
+	echo -e "None yet, why not create one with the edit builtin!"
+fi
